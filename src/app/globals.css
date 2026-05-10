@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #050505;
+  --color-foreground: #f0f0f0;
+  --color-surface: #0f0f13;
+  --color-border: rgba(255,255,255,0.06);
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0b0;
+  --color-text-muted: #606070;
+  --color-cyan: #00e5ff;
+  --color-purple: #9d4edd;
+  --color-pink: #ff007f;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Scroll snap + smooth scroll */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide default scrollbar for cleaner look */
+html::-webkit-scrollbar {
+  width: 6px;
+}
+html::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+html::-webkit-scrollbar-thumb {
+  background: #2a2a35;
+  border-radius: 3px;
+}
+
+/* Neon glow utilities */
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 229, 255, 0.3);
+}
+.text-glow-purple {
+  text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+}
+
+/* Both effect — mid-layer warmth */
+.both-section {
+  background: linear-gradient(
+    135deg,
+    #0f0f13 0%,
+    #151520 30%,
+    #111118 70%,
+    #0a0a0f 100%
+  );
+}
+
+/* Pure dark sections */
+.dark-section {
+  background: #050505;
 }
