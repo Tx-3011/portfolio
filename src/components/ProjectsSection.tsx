@@ -61,7 +61,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
     >
       <div className="max-w-7xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
@@ -84,7 +84,7 @@ export default function ProjectsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-8 md:gap-6"
         >
           {projects.map((project, index) => (
             <motion.div

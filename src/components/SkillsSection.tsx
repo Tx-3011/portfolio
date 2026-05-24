@@ -57,7 +57,7 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
     >
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
@@ -80,7 +80,7 @@ export default function SkillsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6"
         >
           {skillCategories.map((category) => (
             <motion.div

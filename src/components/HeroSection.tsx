@@ -29,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start overflow-hidden bg-[#121415]"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start overflow-hidden bg-[#121415] pt-28 pb-16 md:py-0"
     >
       {/* Geometric / wireframe decorative background elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -72,7 +72,7 @@ export default function HeroSection() {
           variants={itemVariants}
           className="font-sans font-extrabold uppercase text-white leading-none mb-6"
           style={{
-            fontSize: "clamp(3rem, 10vw, 7.5rem)",
+            fontSize: "clamp(2.2rem, 8vw, 7.5rem)",
             letterSpacing: "-0.03em",
           }}
         >

@@ -78,7 +78,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
     >
       <div className="max-w-5xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}

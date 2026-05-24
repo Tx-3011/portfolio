@@ -16,7 +16,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
     >
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Section label */}
@@ -41,7 +41,7 @@ export default function AboutSection() {
               <img
                 src="/profile.jpg"
                 alt="Nookala Tejdeep"
-                className="w-full h-full object-cover filter grayscale contrast-110 hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover hover:scale-105 transition-all duration-500"
               />
             </div>
             {/* Decorative wireframe border */}
@@ -63,7 +63,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.2 }}
-              className="text-white/60 font-mono text-[16px] leading-relaxed mb-6"
+              className="text-white/60 font-mono text-[16px] leading-relaxed mb-8"
             >
               I&apos;m Nookala Tejdeep, a 4th year BTech Computer Science &amp; Engineering student
               at Manipal Institute of Technology, Bangalore. I have a burning passion for building
@@ -74,7 +74,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.3 }}
-              className="text-white/60 font-mono text-[16px] leading-relaxed mb-8"
+              className="text-white/60 font-mono text-[16px] leading-relaxed mb-10"
             >
               My expertise spans Python (Pandas, NumPy, Scikit-Learn), Java, C, SQL, and
               JavaScript. I&apos;m proficient with Git/GitHub, Docker, Jupyter, Linux, Flask,
