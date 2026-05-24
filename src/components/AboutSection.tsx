@@ -35,14 +35,18 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -60 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ ...transition, delay: 0.1 }}
-            className="relative"
+            className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto border border-[#494454] bg-[#1e2021] flex items-center justify-center">
-              <span className="font-sans text-7xl font-extrabold text-[#333536] select-none uppercase tracking-tighter">T</span>
-              {/* Decorative wireframe border */}
-              <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#d0bcff]" />
-              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#d0bcff]" />
+            <div className="w-full h-full border border-[#494454] bg-[#1e2021] overflow-hidden">
+              <img
+                src="/profile.jpg"
+                alt="Nookala Tejdeep"
+                className="w-full h-full object-cover filter grayscale contrast-110 hover:grayscale-0 transition-all duration-500"
+              />
             </div>
+            {/* Decorative wireframe border */}
+            <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#d0bcff]" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#d0bcff]" />
           </motion.div>
 
           {/* Right: Content */}
