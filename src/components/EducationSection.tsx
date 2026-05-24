@@ -45,7 +45,7 @@ export default function EducationSection() {
   return (
     <section
       id="education"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415]"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
     >
       <div className="max-w-4xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}

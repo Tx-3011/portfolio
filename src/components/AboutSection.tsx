@@ -16,7 +16,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415]"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
     >
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Section label */}

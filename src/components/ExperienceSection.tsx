@@ -41,7 +41,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415]"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-20 md:py-0"
     >
       <div className="max-w-5xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
@@ -67,7 +67,7 @@ export default function ExperienceSection() {
           className="relative"
         >
           {/* Vertical line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#494454]" />
+          <div className="absolute left-[6px] md:left-1/2 top-0 bottom-0 w-px bg-[#494454]" />
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
