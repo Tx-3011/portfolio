@@ -70,9 +70,6 @@ html::-webkit-scrollbar-thumb {
   background: #494454;
   border-radius: 0;
 }
-html::-webkit-scrollbar-thumb:hover {
-  background: var(--color-outline);
-}
 
 /* VIOLET_CORE transition utility */
 .violet-snap {

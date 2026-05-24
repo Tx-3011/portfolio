@@ -3,45 +3,32 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
+const transition = {
+  duration: 0.15,
+  ease: [0.19, 1, 0.22, 1] as const,
+};
+
 const skillCategories = [
   {
     title: "Languages",
-    skills: [
-      { name: "Python", level: 92 },
-      { name: "JavaScript (ES6+)", level: 88 },
-      { name: "Java", level: 82 },
-      { name: "C", level: 78 },
-      { name: "SQL (MySQL)", level: 85 },
-    ],
+    skills: ["Python", "JavaScript (ES6+)", "Java", "C", "SQL (MySQL)"],
   },
   {
     title: "Libraries & Frameworks",
-    skills: [
-      { name: "Pandas", level: 90 },
-      { name: "NumPy", level: 85 },
-      { name: "Scikit-Learn", level: 82 },
-      { name: "Flask", level: 80 },
-      { name: "React", level: 88 },
-    ],
+    skills: ["React", "Flask", "Pandas", "NumPy", "Scikit-Learn"],
   },
   {
     title: "Tools & Platforms",
-    skills: [
-      { name: "Git/GitHub", level: 88 },
-      { name: "Docker", level: 70 },
-      { name: "Jupyter Notebooks", level: 90 },
-      { name: "Linux", level: 82 },
-      { name: "MongoDB", level: 78 },
-    ],
+    skills: ["Git/GitHub", "Docker", "Jupyter Notebooks", "Linux", "MongoDB"],
   },
   {
     title: "Core CS & ML",
     skills: [
-      { name: "Data Structures & Algorithms", level: 90 },
-      { name: "OOP", level: 88 },
-      { name: "REST APIs", level: 85 },
-      { name: "Random Forest", level: 80 },
-      { name: "EDA & Feature Engineering", level: 82 },
+      "Data Structures & Algorithms",
+      "OOP",
+      "REST APIs",
+      "Random Forest",
+      "EDA & Feature Engineering",
     ],
   },
 ];
@@ -56,7 +43,11 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 100 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { ...transition, type: "spring" as const, stiffness: 100 },
+  },
 };
 
 export default function SkillsSection() {
@@ -66,20 +57,22 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="h-screen w-full flex items-center justify-center relative snap-start bg-[#050505]"
+      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415]"
     >
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          transition={transition}
+          className="mb-10"
         >
-          <p className="text-cyan-400 text-sm font-mono tracking-widest uppercase mb-2">
+          <p className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-2">
             Skills
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Tech Stack</h2>
+          <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
+            Tech Stack
+          </h2>
         </motion.div>
 
         {/* Skills Grid */}
@@ -87,39 +80,37 @@ export default function SkillsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               variants={itemVariants}
-              whileHover={{ y: -5 }}
-              className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
+              className="p-6 border border-[#494454] bg-[#1e2021] flex flex-col justify-between group hover:border-[#8B5CF6]/50 transition-all duration-300 relative overflow-hidden"
             >
-              <h3 className="text-lg font-semibold text-white mb-4">
-                {category.title}
-              </h3>
-              <div className="space-y-3">
-                {category.skills.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-300 text-xs">{skill.name}</span>
-                      <span className="text-gray-500 text-xs">{skill.level}%</span>
-                    </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${skill.level}%` } : {}}
-                        transition={{
-                          duration: 1.2,
-                          ease: "easeOut",
-                          delay: 0.3,
-                        }}
-                        className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"
-                      />
-                    </div>
-                  </div>
-                ))}
+              {/* Corner accent lines */}
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#494454] group-hover:border-[#d0bcff] transition-colors" />
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#494454] group-hover:border-[#d0bcff] transition-colors" />
+
+              <div>
+                <h3 className="text-lg font-sans font-bold text-white uppercase tracking-tight mb-5 border-b border-[#494454] pb-2 group-hover:border-[#d0bcff] transition-colors">
+                  {category.title}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{
+                        scale: 1.05,
+                        borderColor: "#d0bcff",
+                        backgroundColor: "rgba(139, 92, 246, 0.1)",
+                      }}
+                      className="px-3 py-1.5 border border-[#494454] text-white/80 font-mono text-[12px] tracking-wide bg-[#121415] hover:text-[#d0bcff] transition-all duration-200 cursor-default select-none"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

@@ -11,13 +11,31 @@ const transition = {
 
 const experiences = [
   {
-    role: "Technical Analyst Intern",
-    company: "Siemens",
-    location: "Bangalore, India",
-    duration: "Jan 2026 – Present",
+    role: "Open Source Contributor",
+    company: "Various Projects",
+    location: "Remote",
+    duration: "2024 – Present",
     description:
-      "Collaborating with engineering teams to analyze and optimize software workflows. Building automated data processing pipelines, performing database analysis, and assisting in the deployment of system monitoring dashboards.",
-    skills: ["System Analysis", "Python", "SQL", "Data Engineering", "Enterprise Systems"],
+      "Active contributor to open-source projects with 50+ merged PRs. Focus on performance optimization, accessibility improvements, and documentation.",
+    skills: ["TypeScript", "React", "Git", "CI/CD"],
+  },
+  {
+    role: "Project Lead - PhishShield",
+    company: "Academic Project",
+    location: "Manipal Institute of Technology",
+    duration: "2024",
+    description:
+      "Led the development of an AI-powered URL classification tool using Flask and Gemini LLM APIs. Engineered the data pipeline for lexical analysis.",
+    skills: ["Python", "Flask", "LLM APIs", "REST APIs"],
+  },
+  {
+    role: "Media Head",
+    company: "Literature Society",
+    location: "Manipal Institute of Technology",
+    duration: "2023 – 2024",
+    description:
+      "Analyzed engagement metrics to lead content strategy, resulting in a 40% increase in reach. Managed social media presence and coordinated events.",
+    skills: ["Content Strategy", "Analytics", "Leadership"],
   },
 ];
 

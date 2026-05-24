@@ -64,7 +64,7 @@ export default function HeroSection() {
           variants={itemVariants}
           className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-6"
         >
-          FOURTH YEAR BTECH CSE
+          THIRD YEAR BTECH CSE
         </motion.p>
 
         {/* Main Heading */}

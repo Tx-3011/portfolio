@@ -61,7 +61,7 @@ export default function AboutSection() {
               transition={{ ...transition, delay: 0.2 }}
               className="text-white/60 font-mono text-[16px] leading-relaxed mb-6"
             >
-              I&apos;m Nookala Tejdeep, a 4th year BTech Computer Science &amp; Engineering student
+              I&apos;m Nookala Tejdeep, a 3rd year BTech Computer Science &amp; Engineering student
               at Manipal Institute of Technology, Bangalore. I have a burning passion for building
               software that makes a difference — from crafting sleek frontends to architecting
               robust backends, I thrive on turning complex problems into elegant solutions.

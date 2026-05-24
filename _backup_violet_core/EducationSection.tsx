@@ -14,9 +14,25 @@ const education = [
     degree: "Bachelor of Technology in Computer Science and Engineering",
     institution: "Manipal Institute of Technology, Bangalore",
     year: "2023 – 2027",
-    grade: "CGPA: 8.64",
+    grade: "CGPA: Pursuing",
     description:
-      "Currently in 4th year. Relevant Coursework: Data Structures & Algorithms (DSA), Database Management (SQL), Operating Systems, Probability and Statistics, Computer Networks.",
+      "Currently in 3rd year. Relevant Coursework: Data Structures & Algorithms (DSA), Database Management (SQL), Operating Systems, Probability and Statistics, Computer Networks.",
+  },
+  {
+    degree: "Senior Secondary (XII)",
+    institution: "Higher Secondary School",
+    year: "Completed",
+    grade: "Science Stream",
+    description:
+      "Science stream with Computer Science. Developed a strong foundation in programming and problem-solving during this period.",
+  },
+  {
+    degree: "Secondary (X)",
+    institution: "Secondary School",
+    year: "Completed",
+    grade: "Mathematics & Science",
+    description:
+      "Consistent academic performer with keen interest in mathematics and science.",
   },
 ];
 

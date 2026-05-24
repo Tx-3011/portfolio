@@ -114,16 +114,14 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Mobile controls */}
-        <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-[#e2e2e3] p-2 rounded-none cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden text-[#e2e2e3] p-2 rounded-none"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
       {/* Mobile Menu */}

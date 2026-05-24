@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Nookala Tejdeep | BTech CSE | Portfolio",
   description:
-    "Portfolio of Nookala Tejdeep — 4th Year BTech CSE Student at Manipal Institute of Technology. Developer, Problem Solver & Tech Enthusiast.",
+    "Portfolio of Nookala Tejdeep — 3rd Year BTech CSE Student at Manipal Institute of Technology. Developer, Problem Solver & Tech Enthusiast.",
   keywords: [
     "Nookala Tejdeep",
     "BTech CSE",
@@ -43,7 +43,10 @@ export const metadata: Metadata = {
     description:
       "Developer, Problem Solver & Tech Enthusiast. Explore my projects, skills, and experience.",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -55,12 +58,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${syne.variable} ${jetbrainsMono.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
-      <body
-        className="min-h-full flex flex-col"
-        suppressHydrationWarning
-      >
+      <body className="min-h-full flex flex-col bg-[#121415] text-[#e2e2e3]">
         {children}
       </body>
     </html>
