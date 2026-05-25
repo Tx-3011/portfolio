@@ -145,3 +145,17 @@ html::-webkit-scrollbar-thumb:hover {
   }
 }
 
+/* Touch-device overrides to optimize battery and rendering performance */
+@media (hover: none) {
+  .animate-ping {
+    animation: none !important;
+  }
+  .animate-pulse {
+    animation: none !important;
+  }
+  .bg-mesh {
+    animation: none !important; /* Stop mesh gradient animation to save battery */
+    background-size: 100% 100%;
+  }
+}
+

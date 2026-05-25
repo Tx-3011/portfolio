@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { GitBranch, ArrowUpRight } from "lucide-react";
 import TiltCard from "./TiltCard";
 import MagneticButton from "./MagneticButton";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
   duration: 0.15,
@@ -65,6 +66,7 @@ export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [hovered, setHovered] = useState<number | null>(null);
+  const isTouch = useIsTouchDevice();
 
   return (
     <section
@@ -109,14 +111,18 @@ export default function ProjectsSection() {
             >
               <TiltCard maxRotate={4} className="w-full">
                 <div
-                  className="p-6 md:p-10 border border-[#494454]/40 bg-[#1e2021]/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 group relative overflow-hidden transition-all duration-300"
+                  className={`p-5 md:p-10 border bg-[#1e2021]/60 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 md:gap-8 group relative overflow-hidden transition-all duration-300 ${
+                    isTouch ? "border-[#8B5CF6]/30 shadow-lg" : "border-[#494454]/40"
+                  }`}
                   style={{
-                    boxShadow: hovered === index ? `0 20px 40px rgba(0, 0, 0, 0.4)` : "none",
+                    boxShadow: !isTouch && hovered === index ? `0 20px 40px rgba(0, 0, 0, 0.4)` : "none",
                   }}
                 >
                   {/* Subtle color wash background */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${
+                      isTouch ? "opacity-35" : "opacity-0 group-hover:opacity-100"
+                    }`}
                     style={{
                       background: `radial-gradient(circle at 80% 20%, ${project.color} 0%, transparent 60%)`,
                     }}
@@ -124,7 +130,9 @@ export default function ProjectsSection() {
 
                   {/* Top-Right Glowing Accent Border */}
                   <div
-                    className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
+                      isTouch ? "opacity-45" : "opacity-0 group-hover:opacity-100"
+                    }`}
                     style={{
                       borderTop: `1px solid ${project.borderColor}`,
                       borderRight: `1px solid ${project.borderColor}`,
@@ -137,7 +145,9 @@ export default function ProjectsSection() {
                       <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5">
                         {project.id}
                       </span>
-                      <h3 className="text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight text-white group-hover:text-[#d0bcff] transition-colors duration-150">
+                      <h3 className={`text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight transition-colors duration-150 ${
+                        isTouch ? "text-[#d0bcff]" : "text-white group-hover:text-[#d0bcff]"
+                      }`}>
                         {project.name}
                       </h3>
                     </div>
@@ -150,7 +160,9 @@ export default function ProjectsSection() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border border-[#494454]/60 text-white/55 group-hover:border-[#d0bcff]/30 transition-colors"
+                          className={`px-3 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border transition-colors ${
+                            isTouch ? "border-[#d0bcff]/20 text-[#d0bcff]" : "border-[#494454]/60 text-white/55 group-hover:border-[#d0bcff]/30"
+                          }`}
                         >
                           {tag}
                         </span>
@@ -159,14 +171,14 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* Right Column: GitHub Button Link */}
-                  <div className="relative z-10 flex-shrink-0 md:self-center">
+                  <div className="relative z-10 flex-shrink-0 w-full md:w-auto md:self-center">
                     <MagneticButton
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
+                      className="w-full md:w-auto p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
                     >
-                      <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
+                      <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
                         <GitBranch size={16} />
                         <span>Source Code</span>
                         <ArrowUpRight size={14} className="opacity-60" />

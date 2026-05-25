@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 interface MarqueeProps {
   items: string[];
@@ -11,10 +14,12 @@ export default function Marquee({
   direction = "left",
   className = "",
 }: MarqueeProps) {
-  const content = [...items, ...items, ...items, ...items];
+  const isTouch = useIsTouchDevice();
+  // Duplicate 2x for mobile/touch, 4x for desktop to maintain seamless loop
+  const content = isTouch ? [...items, ...items] : [...items, ...items, ...items, ...items];
 
   return (
-    <div className={`overflow-hidden w-full bg-[#121415] border-y border-[#494454]/40 py-3 select-none flex ${className}`}>
+    <div className={`overflow-hidden w-full bg-[#121415] border-y border-[#494454]/40 py-3 select-none flex touch-pan-y ${className}`}>
       <div
         className="animate-marquee flex whitespace-nowrap gap-12 pr-12"
         style={{ animationDirection: direction === "right" ? "reverse" : "normal" }}

@@ -31,7 +31,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen w-full flex items-center relative overflow-hidden bg-mesh pt-28 pb-16"
+      className="min-h-screen w-full flex items-center relative overflow-hidden bg-mesh pt-24 pb-12 sm:pt-28 sm:pb-16"
     >
       {/* Editorial code grid lines */}
       <div className="absolute inset-0 pointer-events-none opacity-20" aria-hidden="true">
@@ -93,24 +93,24 @@ export default function HeroSection() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap items-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
         >
           <MagneticButton
             href="#contact"
-            className="bg-[#8B5CF6] text-black font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 hover:bg-[#A78BFA] transition-colors duration-150"
+            className="w-full sm:w-auto bg-[#8B5CF6] text-black font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 hover:bg-[#A78BFA] transition-colors duration-150"
           >
             Get in Touch
           </MagneticButton>
           <MagneticButton
             href="#projects"
-            className="bg-transparent text-[#d0bcff] font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 border border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-black transition-all duration-150"
+            className="w-full sm:w-auto bg-transparent text-[#d0bcff] font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 border border-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-black transition-all duration-150"
           >
             View Projects
           </MagneticButton>
           <MagneticButton
             href="/Tejdeep_SE_Resume.pdf"
             download
-            className="bg-transparent text-white/60 font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 border border-[#494454]/60 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all duration-150 flex items-center gap-2"
+            className="w-full sm:w-auto bg-transparent text-white/60 font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 border border-[#494454]/60 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all duration-150 flex items-center justify-center gap-2"
           >
             <Download size={14} />
             Resume
@@ -131,7 +131,7 @@ export default function HeroSection() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/40 hover:text-[#d0bcff] transition-colors duration-150 font-mono text-[12px] uppercase tracking-widest flex items-center gap-1.5"
+              className="text-white/40 hover:text-[#d0bcff] transition-colors duration-150 font-mono text-[12px] uppercase tracking-widest flex items-center gap-1.5 py-2"
               aria-label={label}
             >
               <span>{label}</span>

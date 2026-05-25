@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import TiltCard from "./TiltCard";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
   duration: 0.15,
@@ -58,6 +59,7 @@ const itemVariants = {
 export default function SkillsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isTouch = useIsTouchDevice();
 
   return (
     <section
@@ -99,21 +101,32 @@ export default function SkillsSection() {
               className={`${category.gridClass} w-full`}
             >
               <TiltCard maxRotate={6} className="w-full h-full">
-                <div className="p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 flex flex-col justify-between group hover:border-[#8B5CF6]/50 transition-all duration-300 relative overflow-hidden w-full h-full">
+                <div className={`p-6 md:p-8 border bg-[#1e2021]/60 flex flex-col justify-between group transition-all duration-300 relative overflow-hidden w-full h-full ${
+                  isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
+                }`}>
                   {/* Decorative accent borders */}
-                  <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#494454]/60 group-hover:border-[#d0bcff] transition-colors" />
-                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#494454]/60 group-hover:border-[#d0bcff] transition-colors" />
+                  <div className={`absolute top-0 right-0 w-2 h-2 border-t border-r transition-colors ${
+                    isTouch ? "border-[#d0bcff]/30" : "border-[#494454]/60 group-hover:border-[#d0bcff]"
+                  }`} />
+                  <div className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l transition-colors ${
+                    isTouch ? "border-[#d0bcff]/30" : "border-[#494454]/60 group-hover:border-[#d0bcff]"
+                  }`} />
 
                   <div className="w-full">
-                    <h3 className="text-md font-sans font-bold text-white uppercase tracking-tight mb-6 border-b border-[#494454]/40 pb-3 group-hover:border-[#d0bcff]/40 transition-colors">
+                    <h3 className={`text-md font-sans font-bold text-white uppercase tracking-tight mb-6 border-b pb-3 transition-colors ${
+                      isTouch ? "border-[#d0bcff]/20" : "border-[#494454]/40 group-hover:border-[#d0bcff]/40"
+                    }`}>
                       {category.title}
                     </h3>
                     <div className="flex flex-wrap gap-2.5">
                       {category.skills.map((skill) => (
                         <motion.span
                           key={skill}
-                          whileHover={{ scale: 1.04 }}
-                          className="px-3.5 py-2 border border-[#494454]/60 hover:border-[#d0bcff] hover:bg-[#8B5CF6]/10 text-white/70 hover:text-[#d0bcff] font-mono text-[11px] uppercase tracking-wider bg-[#121415]/80 transition-all duration-200 cursor-default select-none"
+                          whileHover={isTouch ? undefined : { scale: 1.04 }}
+                          whileTap={{ scale: 0.96 }}
+                          className={`px-3.5 py-2 border font-mono text-[11px] uppercase tracking-wider bg-[#121415]/80 transition-all duration-200 cursor-default select-none ${
+                            isTouch ? "border-[#d0bcff]/25 text-[#d0bcff]" : "border-[#494454]/60 hover:border-[#d0bcff] hover:bg-[#8B5CF6]/10 text-white/70 hover:text-[#d0bcff]"
+                          }`}
                         >
                           {skill}
                         </motion.span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import MagneticButton from "./MagneticButton";
@@ -16,11 +16,49 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
+const menuVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      when: "afterChildren",
+      duration: 0.2,
+    },
+  },
+};
+
+const linkVariants = {
+  hidden: { opacity: 0, x: 25 },
+  visible: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 120, damping: 15 } },
+  exit: { opacity: 0, x: -15, transition: { duration: 0.15 } },
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [time, setTime] = useState("");
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   // Local time clock for a custom developer feel
   useEffect(() => {
@@ -157,40 +195,62 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="md:hidden mt-4 p-4 rounded-none bg-[#1e2021]/95 backdrop-blur-xl border border-[#494454]/40"
-          >
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => {
-                const sectionId = link.href.replace("#", "");
-                const isActive = activeSection === sectionId;
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleClick(link.href);
-                    }}
-                    className={`font-mono text-[12px] uppercase tracking-widest py-2.5 cursor-pointer border-b border-[#333536]/40 last:border-b-0 transition-colors duration-150 flex items-center ${
-                      isActive ? "text-[#d0bcff]" : "text-[#e2e2e3] hover:text-[#d0bcff]"
-                    }`}
-                  >
-                    {isActive && (
-                      <span className="inline-block w-1.5 h-1.5 bg-[#d0bcff] mr-2 rounded-full" />
-                    )}
-                    {link.name}
-                  </a>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              variants={menuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 h-dvh w-screen bg-[#121415]/98 backdrop-blur-2xl z-40 md:hidden flex flex-col justify-center px-10 pt-24 pb-12"
+            >
+              {/* Vertical decorative line */}
+              <div className="absolute left-6 top-24 bottom-24 w-px bg-[#494454]/20" />
+
+              <div className="flex flex-col gap-6 relative z-10 pl-6">
+                {navLinks.map((link, idx) => {
+                  const sectionId = link.href.replace("#", "");
+                  const isActive = activeSection === sectionId;
+                  return (
+                    <motion.div key={link.name} variants={linkVariants}>
+                      <a
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleClick(link.href);
+                        }}
+                        className={`font-sans text-3xl font-extrabold uppercase tracking-tight py-1 cursor-pointer flex items-center transition-colors duration-150 ${
+                          isActive ? "text-[#d0bcff]" : "text-[#e2e2e3]/70 hover:text-[#d0bcff]"
+                        }`}
+                      >
+                        <span className="font-mono text-xs text-[#8B5CF6] mr-4 select-none">
+                          0{idx + 1}
+                        </span>
+                        {link.name}
+                        {isActive && (
+                          <motion.span
+                            layoutId="activeNavDotMobile"
+                            className="w-2.5 h-2.5 bg-[#d0bcff] ml-4 rounded-full"
+                          />
+                        )}
+                      </a>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Overlay footer details */}
+              <div className="mt-auto pl-6 font-mono text-[10px] uppercase tracking-widest text-white/30 space-y-2 border-t border-[#494454]/30 pt-6">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                  <span>LOCAL TIME: {time || "00:00:00 IST"}</span>
+                </div>
+                <div>MIT BANGALORE</div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
     </>
   );

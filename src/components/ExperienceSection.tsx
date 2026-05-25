@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import TiltCard from "./TiltCard";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
   duration: 0.15,
@@ -40,6 +41,7 @@ export default function ExperienceSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const lineRef = useRef(null);
   const isLineInView = useInView(lineRef, { once: true });
+  const isTouch = useIsTouchDevice();
 
   return (
     <section
@@ -104,7 +106,9 @@ export default function ExperienceSection() {
                 {/* Card with TiltCard wrapper */}
                 <div className="flex-1 md:w-[calc(50%-2rem)]">
                   <TiltCard maxRotate={5} className="w-full">
-                    <div className="p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 hover:border-[#8B5CF6]/50 transition-colors duration-300 relative group">
+                    <div className={`p-6 md:p-8 border bg-[#1e2021]/60 transition-colors duration-300 relative group ${
+                      isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
+                    }`}>
                       <div className="flex items-start gap-4 mb-4">
                         <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff]">
                           <Briefcase size={20} />
@@ -138,7 +142,9 @@ export default function ExperienceSection() {
                         {exp.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border border-[#494454]/60 text-white/50 group-hover:border-[#d0bcff]/20 transition-colors"
+                            className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border transition-colors ${
+                              isTouch ? "border-[#d0bcff]/20 text-[#d0bcff]" : "border-[#494454]/60 text-white/50 group-hover:border-[#d0bcff]/20"
+                            }`}
                           >
                             {skill}
                           </span>

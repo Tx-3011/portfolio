@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef, useState } from "react";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export default function TiltCard({
   className = "",
   maxRotate = 10,
 }: TiltCardProps) {
+  const isTouch = useIsTouchDevice();
   const ref = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -32,7 +34,7 @@ export default function TiltCard({
   const shineY = useTransform(springY, [0, 1], ["0%", "100%"]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
+    if (isTouch || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -44,14 +46,24 @@ export default function TiltCard({
   };
 
   const handleMouseEnter = () => {
+    if (isTouch) return;
     setHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (isTouch) return;
     setHovered(false);
     x.set(0.5);
     y.set(0.5);
   };
+
+  if (isTouch) {
+    return (
+      <div className={`w-full h-full ${className}`}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div className="perspective-[1000px] w-full h-full">

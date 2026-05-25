@@ -19,19 +19,23 @@ export default function Home() {
       
       <HeroSection />
       
-      <Marquee
-        items={["DESIGNER", "DEVELOPER", "PROBLEM SOLVER", "TECH ENTHUSIAST", "BTECH CSE MIT"]}
-        direction="left"
-        className="-rotate-1 relative z-20 shadow-md"
-      />
+      <div className="w-full overflow-hidden py-2 select-none">
+        <Marquee
+          items={["DESIGNER", "DEVELOPER", "PROBLEM SOLVER", "TECH ENTHUSIAST", "BTECH CSE MIT"]}
+          direction="left"
+          className="-rotate-1 relative z-20 shadow-md"
+        />
+      </div>
       
       <AboutSection />
       
-      <Marquee
-        items={["REACT", "PYTHON", "SQL", "FLASK", "DOCKER", "SCIKIT-LEARN", "PANDAS", "MONGODB", "LINUX"]}
-        direction="right"
-        className="rotate-1 relative z-20 shadow-md"
-      />
+      <div className="w-full overflow-hidden py-2 select-none">
+        <Marquee
+          items={["REACT", "PYTHON", "SQL", "FLASK", "DOCKER", "SCIKIT-LEARN", "PANDAS", "MONGODB", "LINUX"]}
+          direction="right"
+          className="rotate-1 relative z-20 shadow-md"
+        />
+      </div>
       
       <SkillsSection />
       <ProjectsSection />

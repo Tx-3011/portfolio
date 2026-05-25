@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import React, { useRef } from "react";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ export default function MagneticButton({
   rel,
   disabled = false,
 }: MagneticButtonProps) {
+  const isTouch = useIsTouchDevice();
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -33,7 +35,7 @@ export default function MagneticButton({
   const springY = useSpring(y, { stiffness: 100, damping: 12 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current || disabled) return;
+    if (isTouch || !ref.current || disabled) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;
@@ -52,18 +54,21 @@ export default function MagneticButton({
   };
 
   const isLink = !!href;
+  const isFullWidth = className.includes("w-full");
 
   const motionProps = {
-    style: { x: springX, y: springY },
+    style: isTouch ? undefined : { x: springX, y: springY },
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     className: `inline-flex items-center justify-center relative cursor-pointer ${className}`,
     whileTap: disabled ? undefined : { scale: 0.95 },
   };
 
+  const wrapperClass = isFullWidth ? "w-full" : "inline-block";
+
   if (isLink) {
     return (
-      <div ref={ref} className="inline-block">
+      <div ref={ref} className={wrapperClass}>
         <motion.a
           href={href}
           download={download}
@@ -79,7 +84,7 @@ export default function MagneticButton({
   }
 
   return (
-    <div ref={ref} className="inline-block">
+    <div ref={ref} className={wrapperClass}>
       <motion.button
         type="button"
         disabled={disabled}

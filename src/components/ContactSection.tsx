@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { Send, Mail, MapPin, Phone, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import TextScramble from "./TextScramble";
 import MagneticButton from "./MagneticButton";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
   duration: 0.15,
@@ -35,6 +36,7 @@ export default function ContactSection() {
     message: "",
   });
   const [status, setStatus] = useState<FormStatus>("idle");
+  const isTouch = useIsTouchDevice();
 
   // Defer rendering of form inputs to avoid extension hydration conflicts, fixed ESLint warning via requestAnimationFrame
   const [mounted, setMounted] = useState(false);
@@ -101,7 +103,7 @@ export default function ContactSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16">
           {/* Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -144,7 +146,7 @@ export default function ContactSection() {
             </div>
 
             {/* Socials */}
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {[
                 { href: "https://github.com/Tx-3011", label: "GitHub" },
                 { href: "https://linkedin.com/in/tejdeepn", label: "LinkedIn" },
@@ -304,7 +306,7 @@ export default function ContactSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6 }}
-          className="mt-20 pt-8 border-t border-[#494454]/40 flex items-center justify-between"
+          className="mt-20 pt-8 border-t border-[#494454]/40 flex flex-col sm:flex-row gap-4 items-center justify-between text-center sm:text-left"
         >
           <p className="text-[11px] font-mono text-white/30 uppercase tracking-widest">
             &copy; {new Date().getFullYear()} Nookala Tejdeep. All rights reserved.

@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, Calendar, Award } from "lucide-react";
 import TiltCard from "./TiltCard";
+import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
   duration: 0.15,
@@ -42,6 +43,7 @@ const itemVariants = {
 export default function EducationSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isTouch = useIsTouchDevice();
 
   return (
     <section
@@ -79,14 +81,16 @@ export default function EducationSection() {
           {education.map((edu) => (
             <motion.div key={edu.degree} variants={itemVariants} className="w-full">
               <TiltCard maxRotate={4} className="w-full">
-                <div className="flex gap-5 p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 hover:border-[#8B5CF6]/50 transition-colors duration-300 relative group">
+                <div className={`flex gap-5 p-6 md:p-8 border bg-[#1e2021]/60 transition-colors duration-300 relative group ${
+                  isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
+                }`}>
                   <div className="flex-shrink-0">
                     <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff]">
                       <GraduationCap className="w-6 h-6 animate-pulse" />
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-sans font-bold uppercase text-white tracking-tight leading-snug">
+                    <h3 className="text-lg font-sans font-bold uppercase text-white tracking-tight leading-snug break-words">
                       {edu.degree}
                     </h3>
                     <p className="text-[#d0bcff] text-xs font-mono uppercase tracking-widest mt-1 mb-3">
@@ -114,7 +118,9 @@ export default function EducationSection() {
           {/* Certifications Card */}
           <motion.div variants={itemVariants} className="w-full">
             <TiltCard maxRotate={3} className="w-full">
-              <div className="p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 hover:border-[#8B5CF6]/50 transition-colors duration-300">
+              <div className={`p-6 md:p-8 border bg-[#1e2021]/60 transition-colors duration-300 ${
+                isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
+              }`}>
                 <h3 className="text-md font-sans font-bold uppercase text-white tracking-tight mb-4 pb-2 border-b border-[#494454]/40">
                   Certifications
                 </h3>
@@ -122,7 +128,7 @@ export default function EducationSection() {
                   {certifications.map((cert) => (
                     <div
                       key={cert}
-                      className="flex items-start gap-3 text-[12px] font-mono text-white/60 uppercase tracking-widest leading-relaxed"
+                      className="flex items-start gap-3 text-[12px] font-mono text-white/60 uppercase tracking-widest leading-relaxed break-words"
                     >
                       <div className="w-1.5 h-1.5 bg-[#d0bcff] rounded-full mt-1.5 flex-shrink-0" />
                       <span>{cert}</span>

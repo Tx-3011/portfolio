@@ -35,13 +35,13 @@ export default function AboutSection() {
           About Me
         </motion.p>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Left: Profile Visual wrapped in TiltCard */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ ...transition, delay: 0.1 }}
-            className="w-72 h-72 md:w-96 md:h-96 mx-auto"
+            className="w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 mx-auto"
           >
             <TiltCard maxRotate={8} className="w-full h-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
               <div className="w-full h-full border border-[#494454]/60 bg-[#1e2021] relative overflow-hidden group">
@@ -92,7 +92,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.3 }}
-              className="grid grid-cols-3 gap-4"
+              className="grid grid-cols-3 gap-3 md:gap-4"
             >
               {[
                 { icon: Code, label: "Years Coding", value: "3+" },
@@ -101,11 +101,11 @@ export default function AboutSection() {
               ].map(({ icon: Icon, label, value }) => (
                 <div
                   key={label}
-                  className="p-4 border border-[#494454]/40 bg-[#1e2021]/60 text-center hover:border-[#d0bcff]/30 transition-colors duration-200"
+                  className="p-3 md:p-4 border border-[#494454]/40 bg-[#1e2021]/60 text-center hover:border-[#d0bcff]/30 transition-colors duration-200"
                 >
                   <Icon className="w-5 h-5 text-[#d0bcff] mx-auto mb-2" />
-                  <p className="text-xl font-sans font-extrabold text-white tracking-tight">{value}</p>
-                  <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest leading-none mt-1">{label}</p>
+                  <p className="text-base sm:text-xl font-sans font-extrabold text-white tracking-tight">{value}</p>
+                  <p className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-widest leading-none mt-1">{label}</p>
                 </div>
               ))}
             </motion.div>
