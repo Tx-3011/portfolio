@@ -14,7 +14,7 @@ const experiences = [
     role: "Technical Analyst Intern",
     company: "Siemens",
     location: "Bangalore, India",
-    duration: "Jan 2026 – Present",
+    duration: "Jun 2026 – Present",
     description:
       "Collaborating with engineering teams to analyze and optimize software workflows. Building automated data processing pipelines, performing database analysis, and assisting in the deployment of system monitoring dashboards.",
     skills: ["System Analysis", "Python", "SQL", "Data Engineering", "Enterprise Systems"],
