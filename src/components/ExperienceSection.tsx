@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
 import TiltCard from "./TiltCard";
 import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
@@ -110,8 +111,14 @@ export default function ExperienceSection() {
                       isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
                     }`}>
                       <div className="flex items-start gap-4 mb-4">
-                        <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff]">
-                          <Briefcase size={20} />
+                        <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff] flex items-center justify-center">
+                          {exp.company === "Siemens" ? (
+                            <div className="w-5 h-5 relative flex items-center justify-center bg-white rounded-sm p-[2px]">
+                              <Image src="/siemens-logo.png" alt="Siemens" fill className="object-contain" />
+                            </div>
+                          ) : (
+                            <Briefcase size={20} />
+                          )}
                         </div>
                         <div>
                           <h3 className="text-xl font-sans font-extrabold uppercase text-white tracking-tight leading-snug">

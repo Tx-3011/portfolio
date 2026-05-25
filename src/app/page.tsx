@@ -12,7 +12,7 @@ import Marquee from "@/components/Marquee";
 
 export default function Home() {
   return (
-    <main className="scroll-smooth relative">
+    <main className="scroll-smooth relative overflow-x-hidden w-full">
       <CustomCursor />
       <NoiseOverlay />
       <Navbar />

@@ -203,7 +203,7 @@ export default function Navbar() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="fixed inset-0 h-dvh w-screen bg-[#121415]/98 backdrop-blur-2xl z-40 md:hidden flex flex-col justify-center px-10 pt-24 pb-12"
+              className="fixed inset-0 overflow-hidden bg-[#121415]/98 backdrop-blur-2xl z-40 md:hidden flex flex-col justify-center px-10 pt-24 pb-12"
             >
               {/* Vertical decorative line */}
               <div className="absolute left-6 top-24 bottom-24 w-px bg-[#494454]/20" />
