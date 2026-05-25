@@ -194,64 +194,67 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              variants={menuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="fixed inset-0 overflow-hidden bg-[#121415]/98 backdrop-blur-2xl z-40 md:hidden flex flex-col justify-center px-10 pt-24 pb-12"
-            >
-              {/* Vertical decorative line */}
-              <div className="absolute left-6 top-24 bottom-24 w-px bg-[#494454]/20" />
-
-              <div className="flex flex-col gap-6 relative z-10 pl-6">
-                {navLinks.map((link, idx) => {
-                  const sectionId = link.href.replace("#", "");
-                  const isActive = activeSection === sectionId;
-                  return (
-                    <motion.div key={link.name} variants={linkVariants}>
-                      <a
-                        href={link.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleClick(link.href);
-                        }}
-                        className={`font-sans text-3xl font-extrabold uppercase tracking-tight py-1 cursor-pointer flex items-center transition-colors duration-150 ${
-                          isActive ? "text-[#d0bcff]" : "text-[#e2e2e3]/70 hover:text-[#d0bcff]"
-                        }`}
-                      >
-                        <span className="font-mono text-xs text-[#8B5CF6] mr-4 select-none">
-                          0{idx + 1}
-                        </span>
-                        {link.name}
-                        {isActive && (
-                          <motion.span
-                            layoutId="activeNavDotMobile"
-                            className="w-2.5 h-2.5 bg-[#d0bcff] ml-4 rounded-full"
-                          />
-                        )}
-                      </a>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              {/* Overlay footer details */}
-              <div className="mt-auto pl-6 font-mono text-[10px] uppercase tracking-widest text-white/30 space-y-2 border-t border-[#494454]/30 pt-6">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                  <span>LOCAL TIME: {time || "00:00:00 IST"}</span>
-                </div>
-                <div>MIT BANGALORE</div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            variants={menuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 bg-[#121415]/98 backdrop-blur-2xl z-40 md:hidden flex flex-col justify-center px-6 pt-24 pb-12"
+          >
+            {/* Vertical decorative line */}
+            <div className="absolute left-6 top-24 bottom-24 w-px bg-[#494454]/20" />
+
+            <div className="flex flex-col gap-6 relative z-10 pl-6">
+              {navLinks.map((link, idx) => {
+                const sectionId = link.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return (
+                  <motion.div key={link.name} variants={linkVariants}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleClick(link.href);
+                      }}
+                      className={`relative font-sans text-2xl sm:text-3xl font-extrabold uppercase tracking-tight py-2 cursor-pointer flex items-center transition-colors duration-150 ${
+                        isActive ? "text-[#d0bcff]" : "text-[#e2e2e3]/70 hover:text-[#d0bcff]"
+                      }`}
+                    >
+                      {/* Massive background number matching the section style */}
+                      <span className="absolute left-[-10px] sm:left-[-20px] top-1/2 -translate-y-1/2 font-sans font-extrabold text-[15vw] sm:text-[12vw] text-white/[0.04] select-none pointer-events-none z-0">
+                        0{idx + 1}
+                      </span>
+                      
+                      <span className="relative z-10">{link.name}</span>
+                      
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeNavDotMobile"
+                          className="w-2.5 h-2.5 bg-[#d0bcff] ml-3 sm:ml-4 rounded-full relative z-10 flex-shrink-0"
+                        />
+                      )}
+                    </a>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Overlay footer details */}
+            <div className="mt-auto pl-6 font-mono text-[10px] uppercase tracking-widest text-white/30 space-y-2 border-t border-[#494454]/30 pt-6">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                <span>LOCAL TIME: {time || "00:00:00 IST"}</span>
+              </div>
+              <div>MIT BANGALORE</div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

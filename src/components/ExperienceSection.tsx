@@ -50,7 +50,7 @@ export default function ExperienceSection() {
       className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
       {/* Massive section number background */}
-      <div className="absolute right-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+      <div className="absolute right-[5%] top-[2%] md:top-[-5%] font-sans font-extrabold text-[45vw] md:text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
         05
       </div>
 
@@ -111,15 +111,15 @@ export default function ExperienceSection() {
                       isTouch ? "border-[#8B5CF6]/30" : "border-[#494454]/40 hover:border-[#8B5CF6]/50"
                     }`}>
                       <div className="flex items-start gap-4 mb-4">
-                        <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff] flex items-center justify-center">
-                          {exp.company === "Siemens" ? (
-                            <div className="w-5 h-5 relative flex items-center justify-center bg-white rounded-sm p-[2px]">
-                              <Image src="/siemens-logo.png" alt="Siemens" fill className="object-contain" />
-                            </div>
-                          ) : (
+                        {exp.company === "Siemens" ? (
+                          <div className="w-12 h-12 relative flex items-center justify-center flex-shrink-0 overflow-hidden">
+                            <Image src="/siemens-logo.png" alt="Siemens" fill className="object-contain" />
+                          </div>
+                        ) : (
+                          <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff] flex items-center justify-center flex-shrink-0">
                             <Briefcase size={20} />
-                          )}
-                        </div>
+                          </div>
+                        )}
                         <div>
                           <h3 className="text-xl font-sans font-extrabold uppercase text-white tracking-tight leading-snug">
                             {exp.company}

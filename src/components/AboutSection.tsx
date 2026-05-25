@@ -20,7 +20,7 @@ export default function AboutSection() {
       className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
       {/* Massive section number background */}
-      <div className="absolute left-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+      <div className="absolute left-[5%] top-[2%] md:top-[-5%] font-sans font-extrabold text-[45vw] md:text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
         02
       </div>
 

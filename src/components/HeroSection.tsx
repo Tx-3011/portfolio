@@ -42,7 +42,7 @@ export default function HeroSection() {
       </div>
 
       {/* Massive section number background */}
-      <div className="absolute right-[5%] bottom-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+      <div className="absolute right-[5%] bottom-[2%] md:bottom-[-5%] font-sans font-extrabold text-[45vw] md:text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
         01
       </div>
 
