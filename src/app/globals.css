@@ -44,16 +44,9 @@
   --font-mono: var(--font-jetbrains-mono);
 }
 
-/* Scroll snap + smooth scroll */
+/* Scroll behavior */
 html {
   scroll-behavior: smooth;
-}
-
-@media (min-width: 768px) and (min-height: 600px) {
-  html {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-  }
 }
 
 body {
@@ -62,6 +55,8 @@ body {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
 }
 
 section {
@@ -70,89 +65,83 @@ section {
 
 /* Sharp scrollbar */
 html::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 html::-webkit-scrollbar-track {
   background: #0c0e0f;
 }
 html::-webkit-scrollbar-thumb {
   background: #494454;
-  border-radius: 0;
+  border: 2px solid #0c0e0f;
 }
 html::-webkit-scrollbar-thumb:hover {
   background: var(--color-outline);
 }
 
-/* VIOLET_CORE transition utility */
-.violet-snap {
-  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+/* Noise background overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.035;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Glassmorphism card base */
-.glass-card {
-  background: rgba(30, 32, 33, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Animated gradient mesh */
+@keyframes gradient-mesh {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Sharp button primary */
-.btn-primary {
-  background: var(--color-violet);
-  color: #000;
-  font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: none;
-  border-radius: 0;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: background 150ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-.btn-primary:hover {
-  background: var(--color-violet-light);
+.bg-mesh {
+  background: radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+              radial-gradient(circle at 85% 85%, rgba(208, 188, 255, 0.12) 0%, transparent 40%),
+              var(--color-background);
+  background-size: 200% 200%;
+  animation: gradient-mesh 15s ease infinite;
 }
 
-/* Ghost button */
-.btn-ghost {
-  background: transparent;
-  color: var(--color-violet);
-  font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid var(--color-violet);
-  border-radius: 0;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-.btn-ghost:hover {
-  background: var(--color-violet);
-  color: #000;
+/* Marquee continuous scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-/* Section backgrounds */
-.section-base {
-  background: var(--color-background);
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
 }
-.section-glass {
-  background: linear-gradient(
-    135deg,
-    var(--color-surface-container-lowest) 0%,
-    var(--color-surface-container-low) 50%,
-    var(--color-surface-container) 100%
-  );
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* Text glow violet */
 .text-glow-violet {
-  text-shadow: 0 0 10px rgba(208, 188, 255, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+  text-shadow: 0 0 10px rgba(208, 188, 255, 0.4), 0 0 20px rgba(139, 92, 246, 0.2);
 }
 
-/* Outline / wireframe aesthetic */
-.wireframe-box {
-  border: 1px solid var(--color-outline-variant);
-  background: transparent;
+/* Hide default cursor on desktop */
+@media (min-width: 1024px) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
 }
+

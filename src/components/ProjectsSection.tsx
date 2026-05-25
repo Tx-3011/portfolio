@@ -2,7 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { GitBranch } from "lucide-react";
+import { GitBranch, ArrowUpRight } from "lucide-react";
+import TiltCard from "./TiltCard";
+import MagneticButton from "./MagneticButton";
 
 const transition = {
   duration: 0.15,
@@ -11,28 +13,34 @@ const transition = {
 
 const projects = [
   {
+    id: "01",
     name: "PhishShield",
     description:
       "AI-Powered URL Classification Tool — Engineered a real-time URL detection system utilizing Flask and Gemini LLM APIs to identify phishing attempts. Implemented a data pipeline for lexical analysis, extracting features such as entropy and domain structure.",
     tags: ["Python", "Flask", "Google API", "Gemini"],
-    github: "#",
-    color: "#8B5CF6",
+    github: "https://github.com/Tx-3011",
+    color: "rgba(139, 92, 246, 0.12)",
+    borderColor: "#8B5CF6",
   },
   {
+    id: "02",
     name: "NIDS",
     description:
       "Network Intrusion Detection System — Analyzed 125,000+ network connection records to classify traffic as malicious or benign using Random Forest. Automated data cleaning and pre-processing workflows.",
     tags: ["Python", "Scikit-learn", "Random Forest"],
-    github: "#",
-    color: "#d0bcff",
+    github: "https://github.com/Tx-3011",
+    color: "rgba(208, 188, 255, 0.12)",
+    borderColor: "#d0bcff",
   },
   {
+    id: "03",
     name: "LogVisualizer",
     description:
       "Real-time Server Log Analytics — Built a web-based dashboard to visualize server traffic patterns from uploaded log files. Implemented dynamic data visualizations using Chart.js to track HTTP status codes and response time latency.",
     tags: ["JavaScript", "React", "Node.js", "Chart.js"],
-    github: "#",
-    color: "#958ea0",
+    github: "https://github.com/Tx-3011",
+    color: "rgba(149, 142, 160, 0.12)",
+    borderColor: "#958ea0",
   },
 ];
 
@@ -40,38 +48,43 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.15, delayChildren: 0.15 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { ...transition, type: "spring" as const, stiffness: 80, damping: 15 },
+    transition: { ...transition, type: "spring" as const, stiffness: 70, damping: 14 },
   },
 };
 
 export default function ProjectsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section
       id="projects"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
-      <div className="max-w-7xl mx-auto px-6 w-full" ref={ref}>
+      {/* Massive section number background */}
+      <div className="absolute left-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+        04
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={transition}
-          className="mb-10"
+          className="mb-14"
         >
-          <p className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-2">
+          <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Portfolio
           </p>
           <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
@@ -79,12 +92,12 @@ export default function ProjectsSection() {
           </h2>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects Stack */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-3 gap-8 md:gap-6"
+          className="space-y-8"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -92,55 +105,76 @@ export default function ProjectsSection() {
               variants={cardVariants}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
-              className="relative p-5 border border-[#494454] bg-[#1e2021] overflow-hidden group cursor-pointer transition-all duration-150"
-              style={{ transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)" }}
+              className="w-full"
             >
-              {/* Glow border on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none"
-                style={{ transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)", boxShadow: `inset 0 0 0 1px ${project.color}` }}
-              />
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-sans font-bold uppercase text-white group-hover:text-[#d0bcff] transition-colors duration-150 tracking-tight">
-                    {project.name}
-                  </h3>
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-2 bg-[#1a1c1d] border border-[#494454] text-white/50 hover:text-[#d0bcff] transition-colors duration-150"
-                    aria-label={`View ${project.name} on GitHub`}
-                  >
-                    <GitBranch size={18} />
-                  </motion.a>
-                </div>
-                <p className="text-white/50 font-mono text-[13px] leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-[12px] font-mono uppercase tracking-widest bg-[#1a1c1d] border border-[#494454] text-white/60"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <TiltCard maxRotate={4} className="w-full">
+                <div
+                  className="p-6 md:p-10 border border-[#494454]/40 bg-[#1e2021]/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 group relative overflow-hidden transition-all duration-300"
+                  style={{
+                    boxShadow: hovered === index ? `0 20px 40px rgba(0, 0, 0, 0.4)` : "none",
+                  }}
+                >
+                  {/* Subtle color wash background */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 80% 20%, ${project.color} 0%, transparent 60%)`,
+                    }}
+                  />
 
-              {/* Animated bottom border */}
-              <motion.div
-                className="absolute bottom-0 left-0 h-0.5 bg-[#8B5CF6]"
-                initial={{ width: "0%" }}
-                animate={{
-                  width: hovered === index ? "100%" : "0%",
-                }}
-                transition={{ duration: 0.15, ease: [0.19, 1, 0.22, 1] }}
-              />
+                  {/* Top-Right Glowing Accent Border */}
+                  <div
+                    className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      borderTop: `1px solid ${project.borderColor}`,
+                      borderRight: `1px solid ${project.borderColor}`,
+                    }}
+                  />
+
+                  {/* Left Column: Number & Info */}
+                  <div className="flex-1 space-y-4 relative z-10">
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5">
+                        {project.id}
+                      </span>
+                      <h3 className="text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight text-white group-hover:text-[#d0bcff] transition-colors duration-150">
+                        {project.name}
+                      </h3>
+                    </div>
+
+                    <p className="text-white/60 font-mono text-[13px] md:text-[14px] leading-relaxed max-w-2xl">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border border-[#494454]/60 text-white/55 group-hover:border-[#d0bcff]/30 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column: GitHub Button Link */}
+                  <div className="relative z-10 flex-shrink-0 md:self-center">
+                    <MagneticButton
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
+                    >
+                      <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
+                        <GitBranch size={16} />
+                        <span>Source Code</span>
+                        <ArrowUpRight size={14} className="opacity-60" />
+                      </span>
+                    </MagneticButton>
+                  </div>
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -148,3 +182,4 @@ export default function ProjectsSection() {
     </section>
   );
 }
+

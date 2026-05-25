@@ -2,7 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Coffee, Gamepad2, Music } from "lucide-react";
+import { Code, Trophy, GitBranch } from "lucide-react";
+import TiltCard from "./TiltCard";
 
 const transition = {
   duration: 0.15,
@@ -11,48 +12,53 @@ const transition = {
 
 export default function AboutSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
+      {/* Massive section number background */}
+      <div className="absolute left-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+        02
+      </div>
+
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Section label */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={transition}
-          className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-2"
+          className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3"
         >
           About Me
         </motion.p>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left: Wireframe Profile Visual */}
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          {/* Left: Profile Visual wrapped in TiltCard */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ ...transition, delay: 0.1 }}
-            className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
+            className="w-72 h-72 md:w-96 md:h-96 mx-auto"
           >
-            <div className="w-full h-full border border-[#494454] bg-[#1e2021] overflow-hidden">
-              <img
-                src="/profile.jpg"
-                alt="Nookala Tejdeep"
-                className="w-full h-full object-cover hover:scale-105 transition-all duration-500"
-              />
-            </div>
-            {/* Decorative wireframe border */}
-            <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#d0bcff]" />
-            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#d0bcff]" />
+            <TiltCard maxRotate={8} className="w-full h-full shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              <div className="w-full h-full border border-[#494454]/60 bg-[#1e2021] relative overflow-hidden group">
+                <img
+                  src="/profile.jpg"
+                  alt="Nookala Tejdeep"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[#8B5CF6]/5 mix-blend-color-burn pointer-events-none" />
+              </div>
+            </TiltCard>
           </motion.div>
 
           {/* Right: Content */}
           <div>
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.1 }}
               className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white mb-6 tracking-tight"
@@ -60,10 +66,10 @@ export default function AboutSection() {
               The Story So Far
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.2 }}
-              className="text-white/60 font-mono text-[16px] leading-relaxed mb-8"
+              className="text-white/60 font-mono text-[14px] md:text-[15px] leading-relaxed mb-6"
             >
               I&apos;m Nookala Tejdeep, a 4th year BTech Computer Science &amp; Engineering student
               at Manipal Institute of Technology, Bangalore. I have a burning passion for building
@@ -71,10 +77,10 @@ export default function AboutSection() {
               robust backends, I thrive on turning complex problems into elegant solutions.
             </motion.p>
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ ...transition, delay: 0.3 }}
-              className="text-white/60 font-mono text-[16px] leading-relaxed mb-10"
+              transition={{ ...transition, delay: 0.25 }}
+              className="text-white/60 font-mono text-[14px] md:text-[15px] leading-relaxed mb-10"
             >
               My expertise spans Python (Pandas, NumPy, Scikit-Learn), Java, C, SQL, and
               JavaScript. I&apos;m proficient with Git/GitHub, Docker, Jupyter, Linux, Flask,
@@ -83,24 +89,23 @@ export default function AboutSection() {
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ ...transition, delay: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+              transition={{ ...transition, delay: 0.3 }}
+              className="grid grid-cols-3 gap-4"
             >
               {[
-                { icon: Code, label: "Lines of Code", value: "50K+" },
-                { icon: Coffee, label: "Cups of Coffee", value: "999+" },
-                { icon: Gamepad2, label: "Hackathons", value: "5+" },
-                { icon: Music, label: "Open Source PRs", value: "50+" },
+                { icon: Code, label: "Years Coding", value: "3+" },
+                { icon: Trophy, label: "Hackathons", value: "5+" },
+                { icon: GitBranch, label: "Projects Built", value: "10+" },
               ].map(({ icon: Icon, label, value }) => (
                 <div
                   key={label}
-                  className="p-4 border border-[#494454] bg-[#1e2021] text-center"
+                  className="p-4 border border-[#494454]/40 bg-[#1e2021]/60 text-center hover:border-[#d0bcff]/30 transition-colors duration-200"
                 >
-                  <Icon className="w-6 h-6 text-[#d0bcff] mx-auto mb-2" />
+                  <Icon className="w-5 h-5 text-[#d0bcff] mx-auto mb-2" />
                   <p className="text-xl font-sans font-extrabold text-white tracking-tight">{value}</p>
-                  <p className="text-[13px] font-mono text-white/40 uppercase tracking-widest">{label}</p>
+                  <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest leading-none mt-1">{label}</p>
                 </div>
               ))}
             </motion.div>
@@ -110,3 +115,4 @@ export default function AboutSection() {
     </section>
   );
 }
+

@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import TiltCard from "./TiltCard";
 
 const transition = {
   duration: 0.15,
@@ -12,14 +13,17 @@ const skillCategories = [
   {
     title: "Languages",
     skills: ["Python", "JavaScript (ES6+)", "Java", "C", "SQL (MySQL)"],
+    gridClass: "lg:col-span-2 lg:row-span-1",
   },
   {
     title: "Libraries & Frameworks",
     skills: ["React", "Flask", "Pandas", "NumPy", "Scikit-Learn"],
+    gridClass: "lg:col-span-1 lg:row-span-1",
   },
   {
     title: "Tools & Platforms",
     skills: ["Git/GitHub", "Docker", "Jupyter Notebooks", "Linux", "MongoDB"],
+    gridClass: "lg:col-span-1 lg:row-span-1",
   },
   {
     title: "Core CS & ML",
@@ -30,6 +34,7 @@ const skillCategories = [
       "Random Forest",
       "EDA & Feature Engineering",
     ],
+    gridClass: "lg:col-span-2 lg:row-span-1",
   },
 ];
 
@@ -37,7 +42,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
   },
 };
 
@@ -57,17 +62,22 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
+      {/* Massive section number background */}
+      <div className="absolute right-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+        03
+      </div>
+
       <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={transition}
-          className="mb-10"
+          className="mb-12"
         >
-          <p className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-2">
+          <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Skills
           </p>
           <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
@@ -75,43 +85,43 @@ export default function SkillsSection() {
           </h2>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Bento Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               variants={itemVariants}
-              className="p-6 border border-[#494454] bg-[#1e2021] flex flex-col justify-between group hover:border-[#8B5CF6]/50 transition-all duration-300 relative overflow-hidden"
+              className={`${category.gridClass} w-full`}
             >
-              {/* Corner accent lines */}
-              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#494454] group-hover:border-[#d0bcff] transition-colors" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#494454] group-hover:border-[#d0bcff] transition-colors" />
+              <TiltCard maxRotate={6} className="w-full h-full">
+                <div className="p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 flex flex-col justify-between group hover:border-[#8B5CF6]/50 transition-all duration-300 relative overflow-hidden w-full h-full">
+                  {/* Decorative accent borders */}
+                  <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#494454]/60 group-hover:border-[#d0bcff] transition-colors" />
+                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#494454]/60 group-hover:border-[#d0bcff] transition-colors" />
 
-              <div>
-                <h3 className="text-lg font-sans font-bold text-white uppercase tracking-tight mb-5 border-b border-[#494454] pb-2 group-hover:border-[#d0bcff] transition-colors">
-                  {category.title}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <motion.span
-                      key={skill}
-                      whileHover={{
-                        scale: 1.05,
-                        borderColor: "#d0bcff",
-                        backgroundColor: "rgba(139, 92, 246, 0.1)",
-                      }}
-                      className="px-3 py-1.5 border border-[#494454] text-white/80 font-mono text-[12px] tracking-wide bg-[#121415] hover:text-[#d0bcff] transition-all duration-200 cursor-default select-none"
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
+                  <div className="w-full">
+                    <h3 className="text-md font-sans font-bold text-white uppercase tracking-tight mb-6 border-b border-[#494454]/40 pb-3 group-hover:border-[#d0bcff]/40 transition-colors">
+                      {category.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      {category.skills.map((skill) => (
+                        <motion.span
+                          key={skill}
+                          whileHover={{ scale: 1.04 }}
+                          className="px-3.5 py-2 border border-[#494454]/60 hover:border-[#d0bcff] hover:bg-[#8B5CF6]/10 text-white/70 hover:text-[#d0bcff] font-mono text-[11px] uppercase tracking-wider bg-[#121415]/80 transition-all duration-200 cursor-default select-none"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -119,3 +129,4 @@ export default function SkillsSection() {
     </section>
   );
 }
+

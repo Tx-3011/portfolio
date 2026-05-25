@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import TiltCard from "./TiltCard";
 
 const transition = {
   duration: 0.15,
@@ -25,7 +26,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.2, delayChildren: 0.15 },
   },
 };
 
@@ -37,21 +38,28 @@ const itemVariants = {
 export default function ExperienceSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const lineRef = useRef(null);
+  const isLineInView = useInView(lineRef, { once: true });
 
   return (
     <section
       id="experience"
-      className="min-h-screen w-full flex items-center justify-center relative snap-start bg-[#121415] py-24 md:py-0"
+      className="min-h-screen w-full flex items-center justify-center relative bg-[#121415] py-24"
     >
+      {/* Massive section number background */}
+      <div className="absolute right-[5%] top-[-5%] font-sans font-extrabold text-[22vw] text-white/[0.02] leading-none pointer-events-none select-none">
+        05
+      </div>
+
       <div className="max-w-5xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={transition}
-          className="mb-10"
+          className="mb-14"
         >
-          <p className="text-[#d0bcff] text-[13px] font-mono uppercase tracking-widest mb-2">
+          <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Experience
           </p>
           <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
@@ -66,8 +74,15 @@ export default function ExperienceSection() {
           animate={isInView ? "visible" : "hidden"}
           className="relative"
         >
-          {/* Vertical line */}
-          <div className="absolute left-[6px] md:left-1/2 top-0 bottom-0 w-px bg-[#494454]" />
+          {/* Vertical line that draws itself */}
+          <div ref={lineRef} className="absolute left-[6px] md:left-1/2 top-0 bottom-0 w-px bg-[#494454]/40">
+            <motion.div
+              initial={{ height: "0%" }}
+              animate={isLineInView ? { height: "100%" } : {}}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="w-full bg-gradient-to-b from-[#8B5CF6] via-[#d0bcff] to-[#494454]/20"
+            />
+          </div>
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -78,59 +93,60 @@ export default function ExperienceSection() {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Timeline dot */}
-                <div className="relative z-10 flex-shrink-0 mt-1">
-                  <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    className="w-3 h-3 bg-[#d0bcff] shadow-[0_0_10px_rgba(208,188,255,0.5)]"
-                  />
+                {/* Timeline dot with pulse animation */}
+                <div className="relative z-10 flex-shrink-0 mt-1.5 md:absolute md:left-1/2 md:-translate-x-1/2">
+                  <div className="w-3.5 h-3.5 bg-[#d0bcff] border-2 border-[#121415] rounded-full relative z-20 flex items-center justify-center">
+                    <span className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full" />
+                  </div>
+                  <div className="absolute inset-0 bg-[#d0bcff]/30 rounded-full animate-ping z-10" />
                 </div>
 
-                {/* Card */}
-                <motion.div
-                  whileHover={{ y: -3 }}
-                  className="flex-1 p-5 border border-[#494454] bg-[#1e2021] hover:border-[#d0bcff]/30 transition-colors duration-150"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 bg-[#1a1c1d] border border-[#494454]">
-                      <Briefcase size={18} className="text-[#d0bcff]" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-sans font-bold uppercase text-white tracking-tight">
-                        {exp.role}
-                      </h3>
-                      <p className="text-[#d0bcff] text-sm font-mono uppercase tracking-widest">
-                        {exp.company}
+                {/* Card with TiltCard wrapper */}
+                <div className="flex-1 md:w-[calc(50%-2rem)]">
+                  <TiltCard maxRotate={5} className="w-full">
+                    <div className="p-6 md:p-8 border border-[#494454]/40 bg-[#1e2021]/60 hover:border-[#8B5CF6]/50 transition-colors duration-300 relative group">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="p-3 bg-[#1a1c1d] border border-[#494454]/40 text-[#d0bcff]">
+                          <Briefcase size={20} />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-sans font-extrabold uppercase text-white tracking-tight leading-snug">
+                            {exp.company}
+                          </h3>
+                          <p className="text-[#d0bcff] text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold">
+                            {exp.role}
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="text-white/60 font-mono text-[13px] leading-relaxed mb-5">
+                        {exp.description}
                       </p>
+
+                      <div className="flex flex-wrap items-center gap-4 text-[11px] text-white/45 mb-4 font-mono uppercase tracking-wider">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar size={13} />
+                          {exp.duration}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <MapPin size={13} />
+                          {exp.location}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border border-[#494454]/60 text-white/50 group-hover:border-[#d0bcff]/20 transition-colors"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-
-                  <p className="text-white/50 font-mono text-[13px] leading-relaxed mb-4">
-                    {exp.description}
-                  </p>
-
-                  <div className="flex flex-wrap items-center gap-4 text-[12px] text-white/40 mb-3 font-mono uppercase tracking-widest">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={12} />
-                      {exp.duration}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin size={12} />
-                      {exp.location}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2 py-0.5 text-[12px] font-mono uppercase tracking-widest bg-[#1a1c1d] border border-[#494454] text-white/50"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
+                  </TiltCard>
+                </div>
 
                 {/* Spacer for alternating layout */}
                 <div className="hidden md:block flex-1" />
@@ -142,3 +158,4 @@ export default function ExperienceSection() {
     </section>
   );
 }
+
