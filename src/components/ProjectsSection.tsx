@@ -141,11 +141,11 @@ export default function ProjectsSection() {
 
                   {/* Left Column: Number & Info */}
                   <div className="flex-1 space-y-4 relative z-10">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2.5 sm:gap-4">
                       <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5">
                         {project.id}
                       </span>
-                      <h3 className={`text-lg sm:text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight pr-2 transition-colors duration-150 ${
+                      <h3 className={`text-base sm:text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight transition-colors duration-150 ${
                         isTouch ? "text-[#d0bcff]" : "text-white group-hover:text-[#d0bcff]"
                       }`}>
                         {project.name}
