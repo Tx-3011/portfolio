@@ -89,7 +89,7 @@ export default function ProjectsSection() {
           <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Portfolio
           </p>
-          <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
+          <h2 className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase text-white tracking-tight pr-2">
             Featured Projects
           </h2>
         </motion.div>
@@ -145,7 +145,7 @@ export default function ProjectsSection() {
                       <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5">
                         {project.id}
                       </span>
-                      <h3 className={`text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight transition-colors duration-150 ${
+                      <h3 className={`text-lg sm:text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight pr-2 transition-colors duration-150 ${
                         isTouch ? "text-[#d0bcff]" : "text-white group-hover:text-[#d0bcff]"
                       }`}>
                         {project.name}

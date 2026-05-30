@@ -61,7 +61,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...transition, delay: 0.1 }}
-              className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white mb-6 tracking-tight"
+              className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase text-white mb-6 tracking-tight pr-2"
             >
               The Story So Far
             </motion.h2>

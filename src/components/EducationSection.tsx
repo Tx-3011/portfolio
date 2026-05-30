@@ -66,7 +66,7 @@ export default function EducationSection() {
           <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Education
           </p>
-          <h2 className="font-sans font-extrabold text-4xl md:text-5xl uppercase text-white tracking-tight">
+          <h2 className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase text-white tracking-tight pr-2">
             Academic Background
           </h2>
         </motion.div>
@@ -90,7 +90,7 @@ export default function EducationSection() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-sans font-bold uppercase text-white tracking-tight leading-snug break-words">
+                    <h3 className="text-base sm:text-lg font-sans font-bold uppercase text-white tracking-tight pr-2 leading-snug break-words">
                       {edu.degree}
                     </h3>
                     <p className="text-[#d0bcff] text-xs font-mono uppercase tracking-widest mt-1 mb-3">
