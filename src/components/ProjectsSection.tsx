@@ -111,7 +111,7 @@ export default function ProjectsSection() {
             >
               <TiltCard maxRotate={4} className="w-full">
                 <div
-                  className={`p-5 md:p-10 border bg-[#1e2021]/60 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 md:gap-8 group relative overflow-hidden transition-all duration-300 ${
+                  className={`p-6 md:p-10 border bg-[#1e2021]/60 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 md:gap-8 group relative overflow-hidden transition-all duration-300 ${
                     isTouch ? "border-[#8B5CF6]/30 shadow-lg" : "border-[#494454]/40"
                   }`}
                   style={{

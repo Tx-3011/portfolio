@@ -66,7 +66,7 @@ export default function EducationSection() {
           <p className="text-[#d0bcff] text-[12px] font-mono uppercase tracking-widest mb-2 border-l-2 border-[#8B5CF6] pl-3">
             Education
           </p>
-          <h2 className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase text-white tracking-tight pr-2">
+          <h2 className="font-sans font-extrabold text-[1.65rem] sm:text-4xl md:text-5xl uppercase text-white tracking-tight">
             Academic Background
           </h2>
         </motion.div>
