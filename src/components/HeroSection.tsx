@@ -108,7 +108,7 @@ export default function HeroSection() {
             View Projects
           </MagneticButton>
           <MagneticButton
-            href="/Tejdeep_SE_Resume.pdf"
+            href="/Tejdeep_Resume.pdf"
             download
             className="w-full sm:w-auto bg-transparent text-white/60 font-mono font-bold uppercase tracking-widest text-xs px-6 py-3.5 border border-[#494454]/60 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all duration-150 flex items-center justify-center gap-2"
           >
