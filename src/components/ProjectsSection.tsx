@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { GitBranch, ArrowUpRight } from "lucide-react";
 import TiltCard from "./TiltCard";
-import MagneticButton from "./MagneticButton";
 import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
 const transition = {
@@ -88,7 +87,7 @@ export default function ProjectsSection() {
         04
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 w-full" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6 w-full" ref={ref}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -104,12 +103,12 @@ export default function ProjectsSection() {
           </h2>
         </motion.div>
 
-        {/* Projects Stack */}
+        {/* Projects Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="space-y-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -117,11 +116,11 @@ export default function ProjectsSection() {
               variants={cardVariants}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
-              className="w-full"
+              className="w-full h-full"
             >
-              <TiltCard maxRotate={4} className="w-full">
+              <TiltCard maxRotate={4} className="w-full h-full">
                 <div
-                  className={`p-6 md:p-10 border bg-[#1e2021]/60 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 md:gap-8 group relative overflow-hidden transition-all duration-300 ${
+                  className={`p-6 md:p-8 h-full border bg-[#1e2021]/60 flex flex-col gap-5 group relative overflow-hidden transition-all duration-300 ${
                     isTouch ? "border-[#8B5CF6]/30 shadow-lg" : "border-[#494454]/40"
                   }`}
                   style={{
@@ -149,59 +148,57 @@ export default function ProjectsSection() {
                     }}
                   />
 
-                  {/* Left Column: Number & Info */}
-                  <div className="flex-1 space-y-4 relative z-10">
-                    <div className="flex items-center gap-2.5 sm:gap-4">
-                      <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5">
+                  {/* Header: Number & Title */}
+                  <div className="flex items-start justify-between gap-3 relative z-10">
+                    <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
+                      <span className="font-mono text-xs text-[#d0bcff] font-semibold border border-[#d0bcff]/40 px-2 py-0.5 flex-shrink-0">
                         {project.id}
                       </span>
-                      <h3 className={`text-base sm:text-xl md:text-2xl font-sans font-extrabold uppercase tracking-tight transition-colors duration-150 ${
+                      <h3 className={`text-base sm:text-lg md:text-xl font-sans font-extrabold uppercase tracking-tight leading-tight transition-colors duration-150 ${
                         isTouch ? "text-[#d0bcff]" : "text-white group-hover:text-[#d0bcff]"
                       }`}>
                         {project.name}
                       </h3>
                     </div>
-
-                    <p className="text-white/60 font-mono text-[13px] md:text-[14px] leading-relaxed max-w-2xl">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className={`px-3 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border transition-colors ${
-                            isTouch ? "border-[#d0bcff]/20 text-[#d0bcff]" : "border-[#494454]/60 text-white/55 group-hover:border-[#d0bcff]/30"
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
-                  {/* Right Column: GitHub Button Link */}
-                  <div className="relative z-10 flex-shrink-0 w-full md:w-auto md:self-center">
+                  {/* Description */}
+                  <p className="text-white/60 font-mono text-[13px] leading-relaxed relative z-10 flex-1">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 relative z-10">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={`px-3 py-1 text-[10px] font-mono uppercase tracking-widest bg-[#121415]/80 border transition-colors ${
+                          isTouch ? "border-[#d0bcff]/20 text-[#d0bcff]" : "border-[#494454]/60 text-white/55 group-hover:border-[#d0bcff]/30"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Source Link */}
+                  <div className="relative z-20 pt-1">
                     {project.github ? (
-                      <MagneticButton
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full md:w-auto p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
+                        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200 font-semibold w-full sm:w-auto justify-center"
                       >
-                        <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
-                          <GitBranch size={16} />
-                          <span>Source Code</span>
-                          <ArrowUpRight size={14} className="opacity-60" />
-                        </span>
-                      </MagneticButton>
+                        <GitBranch size={16} />
+                        <span>Source Code</span>
+                        <ArrowUpRight size={14} className="opacity-60" />
+                      </a>
                     ) : (
-                      <div className="w-full md:w-auto p-4 bg-[#1a1c1d]/50 border border-[#494454]/30 text-white/30 cursor-default">
-                        <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
-                          <GitBranch size={16} />
-                          <span>Source Unavailable</span>
-                        </span>
-                      </div>
+                      <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 bg-[#1a1c1d]/50 border border-[#494454]/30 text-white/30 cursor-default font-semibold w-full sm:w-auto justify-center">
+                        <GitBranch size={16} />
+                        <span>Source Unavailable</span>
+                      </span>
                     )}
                   </div>
                 </div>

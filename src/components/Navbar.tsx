@@ -87,26 +87,32 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track active section with IntersectionObserver
+  // Track active section based on which section's top is closest to the nav line
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: "-10% 0px -70% 0px" }
-    );
+    const sectionIds = navLinks.map((link) => link.href.replace("#", ""));
 
-    navLinks.forEach((link) => {
-      const sectionId = link.href.replace("#", "");
-      const el = document.getElementById(sectionId);
-      if (el) observer.observe(el);
-    });
+    const updateActiveSection = () => {
+      const probeY = window.scrollY + window.innerHeight * 0.3;
+      let current = sectionIds[0];
 
-    return () => observer.disconnect();
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.offsetTop <= probeY) {
+          current = id;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   const handleClick = (href: string) => {
