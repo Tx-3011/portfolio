@@ -13,17 +13,32 @@ const transition = {
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["Python", "JavaScript (ES6+)", "Java", "C", "SQL (MySQL)"],
+    skills: [
+      "Python",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "Java",
+      "C",
+      "SQL (MySQL/PostgreSQL)",
+    ],
     gridClass: "lg:col-span-2 lg:row-span-1",
   },
   {
     title: "Libraries & Frameworks",
-    skills: ["React", "Flask", "Pandas", "NumPy", "Scikit-Learn"],
+    skills: ["React", "Flask", "Node.js", "Pandas", "NumPy", "Scikit-Learn"],
     gridClass: "lg:col-span-1 lg:row-span-1",
   },
   {
     title: "Tools & Platforms",
-    skills: ["Git/GitHub", "Docker", "Jupyter Notebooks", "Linux", "MongoDB"],
+    skills: [
+      "Git/GitHub",
+      "Docker",
+      "Playwright",
+      "Snowflake",
+      "Jupyter Notebooks",
+      "Linux",
+      "MongoDB",
+    ],
     gridClass: "lg:col-span-1 lg:row-span-1",
   },
   {
@@ -31,9 +46,12 @@ const skillCategories = [
     skills: [
       "Data Structures & Algorithms",
       "OOP",
+      "Enterprise Application Design",
       "REST APIs",
       "Random Forest",
+      "Generative AI (Gemini API)",
       "EDA & Feature Engineering",
+      "Data Analytics",
     ],
     gridClass: "lg:col-span-2 lg:row-span-1",
   },

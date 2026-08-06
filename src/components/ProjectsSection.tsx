@@ -19,7 +19,7 @@ const projects = [
     description:
       "AI-Powered URL Classification Tool — Engineered a real-time URL detection system utilizing Flask and Gemini LLM APIs to identify phishing attempts. Implemented a data pipeline for lexical analysis, extracting features such as entropy and domain structure.",
     tags: ["Python", "Flask", "Google API", "Gemini"],
-    github: "https://github.com/Tx-3011",
+    github: "https://github.com/Tx-3011/PhishShield",
     color: "rgba(139, 92, 246, 0.12)",
     borderColor: "#8B5CF6",
   },
@@ -29,17 +29,27 @@ const projects = [
     description:
       "Network Intrusion Detection System — Analyzed 125,000+ network connection records to classify traffic as malicious or benign using Random Forest. Automated data cleaning and pre-processing workflows.",
     tags: ["Python", "Scikit-learn", "Random Forest"],
-    github: "https://github.com/Tx-3011",
+    github: "https://github.com/Tx-3011/network-intrusion-detection",
     color: "rgba(208, 188, 255, 0.12)",
     borderColor: "#d0bcff",
   },
   {
     id: "03",
+    name: "Playwright Test Automation Framework",
+    description:
+      "Production-ready E2E test framework using the Page Object Model, covering login, cart, and checkout flows. Implemented storageState-based authentication to bypass redundant login steps, reducing test runtime and flakiness. Configured a GitHub Actions CI pipeline to run cross-browser tests headlessly and auto-upload trace/HTML reports on failure.",
+    tags: ["TypeScript", "Playwright", "GitHub Actions"],
+    github: "https://github.com/Tx-3011/playwright-test-sauce",
+    color: "rgba(45, 212, 191, 0.12)",
+    borderColor: "#2dd4bf",
+  },
+  {
+    id: "04",
     name: "LogVisualizer",
     description:
       "Real-time Server Log Analytics — Built a web-based dashboard to visualize server traffic patterns from uploaded log files. Implemented dynamic data visualizations using Chart.js to track HTTP status codes and response time latency.",
     tags: ["JavaScript", "React", "Node.js", "Chart.js"],
-    github: "https://github.com/Tx-3011",
+    github: null,
     color: "rgba(149, 142, 160, 0.12)",
     borderColor: "#958ea0",
   },
@@ -172,18 +182,27 @@ export default function ProjectsSection() {
 
                   {/* Right Column: GitHub Button Link */}
                   <div className="relative z-10 flex-shrink-0 w-full md:w-auto md:self-center">
-                    <MagneticButton
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full md:w-auto p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
-                    >
-                      <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
-                        <GitBranch size={16} />
-                        <span>Source Code</span>
-                        <ArrowUpRight size={14} className="opacity-60" />
-                      </span>
-                    </MagneticButton>
+                    {project.github ? (
+                      <MagneticButton
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full md:w-auto p-4 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200"
+                      >
+                        <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
+                          <GitBranch size={16} />
+                          <span>Source Code</span>
+                          <ArrowUpRight size={14} className="opacity-60" />
+                        </span>
+                      </MagneticButton>
+                    ) : (
+                      <div className="w-full md:w-auto p-4 bg-[#1a1c1d]/50 border border-[#494454]/30 text-white/30 cursor-default">
+                        <span className="flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-widest px-2 font-semibold">
+                          <GitBranch size={16} />
+                          <span>Source Unavailable</span>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </TiltCard>
