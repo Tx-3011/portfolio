@@ -29,8 +29,8 @@ const projects = [
       "Network Intrusion Detection System — Analyzed 125,000+ network connection records to classify traffic as malicious or benign using Random Forest. Automated data cleaning and pre-processing workflows.",
     tags: ["Python", "Scikit-learn", "Random Forest"],
     github: "https://github.com/Tx-3011/network-intrusion-detection",
-    color: "rgba(208, 188, 255, 0.12)",
-    borderColor: "#d0bcff",
+    color: "rgba(239, 68, 68, 0.12)",
+    borderColor: "#ef4444",
   },
   {
     id: "03",
@@ -49,8 +49,8 @@ const projects = [
       "Real-time Server Log Analytics — Built a web-based dashboard to visualize server traffic patterns from uploaded log files. Implemented dynamic data visualizations using Chart.js to track HTTP status codes and response time latency.",
     tags: ["JavaScript", "React", "Node.js", "Chart.js"],
     github: null,
-    color: "rgba(149, 142, 160, 0.12)",
-    borderColor: "#958ea0",
+    color: "rgba(59, 130, 246, 0.12)",
+    borderColor: "#3b82f6",
   },
 ];
 
@@ -183,23 +183,17 @@ export default function ProjectsSection() {
 
                   {/* Source Link */}
                   <div className="relative z-20 pt-1">
-                    {project.github ? (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200 font-semibold w-full sm:w-auto justify-center"
-                      >
-                        <GitBranch size={16} />
-                        <span>Source Code</span>
-                        <ArrowUpRight size={14} className="opacity-60" />
-                      </a>
-                    ) : (
-                      <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 bg-[#1a1c1d]/50 border border-[#494454]/30 text-white/30 cursor-default font-semibold w-full sm:w-auto justify-center">
-                        <GitBranch size={16} />
-                        <span>Source Unavailable</span>
-                      </span>
-                    )}
+                    <a
+                      href={project.github ?? "#"}
+                      target={project.github ? "_blank" : undefined}
+                      rel={project.github ? "noopener noreferrer" : undefined}
+                      onClick={project.github ? undefined : (e) => e.preventDefault()}
+                      className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 bg-[#1a1c1d] border border-[#494454]/60 text-white/50 hover:text-[#d0bcff] hover:border-[#d0bcff] transition-all duration-200 font-semibold w-full sm:w-auto justify-center"
+                    >
+                      <GitBranch size={16} />
+                      <span>Source Code</span>
+                      <ArrowUpRight size={14} className="opacity-60" />
+                    </a>
                   </div>
                 </div>
               </TiltCard>
