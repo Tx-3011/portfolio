@@ -2,7 +2,7 @@
 
 A premium, interactive developer portfolio showcasing my engineering projects, experience, skills, and academic background. 
 
-🚀 **Live Deployment:** [Deploy on Vercel](https://vercel.com/) (or insert your custom link here)
+🚀 **Live Deployment:** www.tejdeep.dev
 
 ---
 
