@@ -14,12 +14,12 @@ const transition = {
 
 const experiences = [
   {
-    role: "Technical Analyst Intern",
+    role: "Technical Intern",
     company: "Siemens",
     location: "Bangalore, India",
-    duration: "Jun 2026 – Present",
+    duration: "June 2026 – November 2026",
     description:
-      "Collaborating with engineering teams to analyze and optimize software workflows. Building automated data processing pipelines, performing database analysis, and assisting in the deployment of system monitoring dashboards.",
+      "Collaborating with engineering teams to analyze and optimize software workflows. Building automated data processing pipelines, exploring databases and agentic AI, and assisting in the deployment of system monitoring dashboards.",
     skills: ["System Analysis", "Python", "SQL", "Data Engineering", "Enterprise Systems"],
   },
 ];
