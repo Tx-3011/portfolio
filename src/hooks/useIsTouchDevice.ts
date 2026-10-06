@@ -9,15 +9,15 @@ export default function useIsTouchDevice() {
     if (typeof window === "undefined") return;
 
     const checkTouch = () => {
-      const match = window.matchMedia("(hover: none)");
-      setIsTouch(match.matches || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+      const match = window.matchMedia("(any-hover: hover) and (any-pointer: fine)");
+      setIsTouch(!match.matches);
     };
 
     checkTouch();
 
-    const mediaQuery = window.matchMedia("(hover: none)");
+    const mediaQuery = window.matchMedia("(any-hover: hover) and (any-pointer: fine)");
     const handler = (e: MediaQueryListEvent) => {
-      setIsTouch(e.matches || "ontouchstart" in window || navigator.maxTouchPoints > 0);
+      setIsTouch(!e.matches);
     };
 
     // Support older and newer listener APIs

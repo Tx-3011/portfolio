@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useScroll, useMotionTemplate } from "framer-motion";
 import React, { useRef, useState } from "react";
 import useIsTouchDevice from "../hooks/useIsTouchDevice";
 
@@ -51,7 +51,7 @@ export default function TiltCard({
   // Dynamic blends
   const rotateX = useTransform(
     [springPassiveRotateX, activeRotateX, springActiveProgress],
-    (latest: any[]) => {
+    (latest: number[]) => {
       const p = latest[0] as number;
       const a = latest[1] as number;
       const pr = latest[2] as number;
@@ -60,7 +60,7 @@ export default function TiltCard({
   );
   const rotateY = useTransform(
     [activeRotateY, springActiveProgress],
-    (latest: any[]) => {
+    (latest: number[]) => {
       const a = latest[0] as number;
       const pr = latest[1] as number;
       return pr * a;
@@ -70,6 +70,7 @@ export default function TiltCard({
   // Specular highlight gradient mapping (active tilt only)
   const shineX = useTransform(springX, [0, 1], ["0%", "100%"]);
   const shineY = useTransform(springY, [0, 1], ["0%", "100%"]);
+  const shineBackground = useMotionTemplate`radial-gradient(circle at ${shineX} ${shineY}, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 65%)`;
 
   // Mouse Handlers
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -119,7 +120,7 @@ export default function TiltCard({
   };
 
   return (
-    <div className="perspective-[1000px] w-full h-full">
+    <div className="w-full h-full" style={{ perspective: 1000 }}>
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
@@ -132,11 +133,10 @@ export default function TiltCard({
         style={{
           rotateX,
           rotateY,
-          transformStyle: "preserve-3d",
         }}
         className={`relative w-full h-full transition-shadow duration-300 ${className}`}
       >
-        <div className="w-full h-full" style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}>
+        <div className="relative w-full h-full">
           {children}
         </div>
 
@@ -145,7 +145,7 @@ export default function TiltCard({
           className="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 z-30 mix-blend-overlay"
           style={{
             opacity: hovered ? 0.15 : 0,
-            background: `radial-gradient(circle at ${shineX} ${shineY}, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 65%)`,
+            background: shineBackground,
           }}
         />
       </motion.div>

@@ -183,7 +183,7 @@ export default function ProjectsSection() {
 
                   {/* Source Link */}
                   <div className="relative z-20 pt-1">
-                    <a
+                    {project.github ? <a
                       href={project.github ?? "#"}
                       target={project.github ? "_blank" : undefined}
                       rel={project.github ? "noopener noreferrer" : undefined}
@@ -193,7 +193,10 @@ export default function ProjectsSection() {
                       <GitBranch size={16} />
                       <span>Source Code</span>
                       <ArrowUpRight size={14} className="opacity-60" />
-                    </a>
+                    </a> : <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-3 border border-[#494454]/60 text-white/40">
+                      <GitBranch size={16} />
+                      Source unavailable
+                    </span>}
                   </div>
                 </div>
               </TiltCard>
